@@ -3,42 +3,41 @@
 
 # JetBrainsMonoNerdFonts (OpenType Layout, TrueType Outlines) (Regulear)
 
-[English](README.md) · [简体中文](README.ZH-CN.md)
-
-An auto-updated and customized compiling version of [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono) that has been patched with [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts).
+一个自更新且自定义的[JetBrains Mono](https://github.com/JetBrains/JetBrainsMono)编译版本，为其附加了[Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)字形。
 
 # Features or Limitations
-- Add all available `Nerd Fonts` glyphs by `--complete`.
-- Aim to `editor` and `terminal` scenarios. So:
-  - Only patch `Regular` font and remove any other fonts.
-  - Only patch `JetBrainsMono-Regular.ttf` and output `JetBrainsMonoNerdFont-Regular.ttf`.
+
+- 添加了当前所有可获得的`Nerd Fonts`字形。（通过`--complete`）
+- 目标是供`编辑器`或`终端`使用。因此：
+  - 只针对`Regular`字体，移除了其他字体。
+  - 只对`JetBrainsMono-Regular.ttf`进行了补丁，输出为`JetBrainsMonoNerdFont-Regular.ttf`。
 
 # License
-- Codes: [MIT License](https://github.com/ryanoasis/nerd-fonts/blob/master/LICENSE)
-- Fonts: [OFL-1.1 License](https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt)
 
+- 代码: [MIT License](https://github.com/ryanoasis/nerd-fonts/blob/master/LICENSE)
+- 字体: [OFL-1.1 License](https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt)
 
 # Usage
 
-**NOTICE**: This repository can update automatically by `Github Actions`. You can just download `JetBrainsMonoNerdFont-Regular-v*.*.ttf` from [the latest release](https://github.com/Zhaopudark/JetBrainsMonoNerdFonts/releases).
+**注意**: 这个仓库可以借助`Github Actions`自动更新和发布（部署）。您可以直接在[发布页面](https://github.com/Zhaopudark/JetBrainsMonoNerdFonts/releases)找到最新版本的字体文件`JetBrainsMonoNerdFont-Regular-v*.*.ttf`并下载安装使用。
 
-Or, you can build it by yourself as the following steps.
+或者，您可以按照下面的步骤自行编译。
 
 ## Build
 
 ### Build on Windows
-- Requirements:
-    - `Windows` platform.
-    - `Python 3.11` or higher. (As long as you can install the following dependencies correctly.)
-    - `Winget`, i.e., [winget-cli](https://github.com/microsoft/winget-cli)
-    - Other Tools:
+- 要求：
+    - `Windows` 平台.
+    - `Python 3.11` 或更高（前提是能正确安装后续依赖）.
+    - `Winget`工具，例如[winget-cli](https://github.com/microsoft/winget-cli)
+    - 其他工具：
       - [PSComputerManagementZp](https://www.powershellgallery.com/packages/PSComputerManagementZp)
       - [FontForge](https://fontforge.org/en-US/downloads/)
       - [gftools builder](https://googlefonts.github.io/gf-guide/build.html)
       - [fonttools](https://fonttools.readthedocs.io/en/latest/)
+      
+- 编译步骤：
     
-- Steps:
-  
   ```powershell
   git clone https://github.com/Zhaopudark/JetBrainsMonoNerdFonts.git
   cd JetBrainsMonoNerdFonts
@@ -52,20 +51,19 @@ Or, you can build it by yourself as the following steps.
   pip install -r "./requirements.txt" -q
   . ".\build.ps1"
   ```
-  
-- Get the output font file from `.\Output\JetBrainsMonoNerdFont-Regular.ttf`.
+- 得到输出文件 `.\Output\JetBrainsMonoNerdFont-Regular.ttf`.
 
 ### Build on Linux
 
-- Requirements:
-  - `Linux` platform.
-  - `Python 3.11` or higher. (As long as you can install the following dependencies correctly.)
-  - Other Tools:
+- 要求：
+  - `Linux` 平台.
+  - `Python 3.11` 或更高（前提是能正确安装后续依赖）.
+  - 其他工具：
     - [FontForge](https://fontforge.org/en-US/downloads/)
     - [gftools builder](https://googlefonts.github.io/gf-guide/build.html)
     - [fonttools](https://fonttools.readthedocs.io/en/latest/)
 
-- Steps:
+- 编译步骤：
   
   ```powershell
   git clone https://github.com/Zhaopudark/JetBrainsMonoNerdFonts.git
@@ -77,4 +75,5 @@ Or, you can build it by yourself as the following steps.
   . "./build.ps1"
   ```
   
-- Get the output font file from `.\Output\JetBrainsMonoNerdFont-Regular.ttf`.
+- 得到输出文件 `.\Output\JetBrainsMonoNerdFont-Regular.ttf`.
+
