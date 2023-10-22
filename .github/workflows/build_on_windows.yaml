@@ -18,12 +18,12 @@ jobs:
         try{
           $last_release = Invoke-RestMethod -Uri "https://api.github.com/repos/${Env:GIT_USER_NAME}/JetBrainsMonoNerdFonts/releases"
           $last_release_time = [System.DateTime]::Parse($last_release.created_at)
-          $currentTime = Get-Date
           Write-Host "Last release time: $($last_release_time.ToString("yyyy-MM-dd HH:mm:ss"))"
-          Write-Host "Current time: $($currentTime.ToString("yyyy-MM-dd HH:mm:ss"))"
-          $timeDifference = ($currentTime - $lastReleaseTime).TotalSeconds
-          Write-Host "Time difference: $timeDifference"
-          if ($timeDifference -le 86400) {
+          $current_time = Get-Date
+          Write-Host "Current time: $($current_time.ToString("yyyy-MM-dd HH:mm:ss"))"
+          $time_difference = ($current_time - $last_release_time).TotalSeconds
+          Write-Host "Time difference: $time_difference"
+          if ($time_difference -le 86400) {
             Write-Host "The latest release is less than 24 hours old. Additional building tests will be cunducted."
             "should_ship_build_tests=false" | Out-File -FilePath $env:GITHUB_ENV -Append
           } else {
