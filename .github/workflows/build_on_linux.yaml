@@ -13,6 +13,7 @@ jobs:
     - name: Check for new release
       env:
         GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
+      shell: pwsh
       run: |
         try{
           $last_release = Invoke-RestMethod -Uri "https://api.github.com/repos/${Env:GIT_USER_NAME}/JetBrainsMonoNerdFonts/releases"
