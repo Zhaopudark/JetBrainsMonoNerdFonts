@@ -36,7 +36,7 @@ jobs:
     - name: Checkout repository
       if: ${{ env.should_ship_build_tests == 'false' }}
       uses: actions/checkout@v4
-    -  if: ${{ env.should_ship_build_tests == 'false' }}
+    - if: ${{ env.should_ship_build_tests == 'false' }}
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
