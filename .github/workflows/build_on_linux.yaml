@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        ref: main
     - name: Check for new release
       env:
         GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
@@ -34,9 +38,6 @@ jobs:
           Write-Host "No release found. Additional building tests will be skipped."
           "should_ship_build_tests=true" | Out-File -FilePath $env:GITHUB_ENV -Append
         }
-    - name: Checkout repository
-      if: ${{ env.should_ship_build_tests == 'false' }}
-      uses: actions/checkout@v4
     - if: ${{ env.should_ship_build_tests == 'false' }}
       uses: actions/setup-python@v4
       with:
