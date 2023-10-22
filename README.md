@@ -3,7 +3,15 @@
 
 # JetBrainsMonoNerdFonts (OpenType Layout, TrueType Outlines) (Regulear)
 
+<div align="center">
+<strong>
+<samp>
+
 [English](README.md) · [简体中文](README.ZH-CN.md)
+
+</samp>
+</strong>
+</div>
 
 An auto-updated and customized compiling version of [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono) that has been patched with [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts).
 
