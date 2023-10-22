@@ -15,7 +15,7 @@
 
 # JetBrainsMonoNerdFonts (OpenType Layout, TrueType Outlines) (Regulear)
 
-An auto-updated and customized compiling version of [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono) that has been patched with [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts).
+An auto-updated compiling version of [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono) that has been patched with [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts).
 
 # Features or Limitations
 - Add all available `Nerd Fonts` glyphs by `--complete`.

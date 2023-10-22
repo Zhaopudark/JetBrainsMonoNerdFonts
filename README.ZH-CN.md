@@ -15,7 +15,7 @@
 
 # JetBrainsMonoNerdFonts (OpenType Layout, TrueType Outlines) (Regulear)
 
-一个自更新且自定义的[JetBrains Mono](https://github.com/JetBrains/JetBrainsMono)编译版本，为其附加了[Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)字形。
+一个自更新的[JetBrains Mono](https://github.com/JetBrains/JetBrainsMono)编译版本，为其附加了[Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)字形。
 
 # Features or Limitations
 
