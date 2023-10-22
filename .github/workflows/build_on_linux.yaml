@@ -11,28 +11,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check for new release
-        env:
-          GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
-        run: |
-          try{
-            $last_release = Invoke-RestMethod -Uri "https://api.github.com/repos/${Env:GIT_USER_NAME}/JetBrainsMonoNerdFonts/releases"
-            $last_release_time = [System.DateTime]::Parse($last_release.created_at)
-            $currentTime = Get-Date
-            Write-Host "Last release time: $($last_release_time.ToString("yyyy-MM-dd HH:mm:ss"))"
-            Write-Host "Current time: $($currentTime.ToString("yyyy-MM-dd HH:mm:ss"))"
-            $timeDifference = ($currentTime - $lastReleaseTime).TotalSeconds
-            Write-Host "Time difference: $timeDifference"
-            if ($timeDifference -le 86400) {
-              Write-Host "The latest release is less than 24 hours old. Additional building tests will be cunducted."
-              "should_ship_build_tests=false" | Out-File -FilePath $env:GITHUB_ENV -Append
-            } else {
-              Write-Host "The latest release is more than 24 hours old. Additional building tests will be skipped."
-              "should_ship_build_tests=true" | Out-File -FilePath $env:GITHUB_ENV -Append
-            }
-          }catch{
-            Write-Host "No release found. Additional building tests will be skipped."
+      env:
+        GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
+      run: |
+        try{
+          $last_release = Invoke-RestMethod -Uri "https://api.github.com/repos/${Env:GIT_USER_NAME}/JetBrainsMonoNerdFonts/releases"
+          $last_release_time = [System.DateTime]::Parse($last_release.created_at)
+          $currentTime = Get-Date
+          Write-Host "Last release time: $($last_release_time.ToString("yyyy-MM-dd HH:mm:ss"))"
+          Write-Host "Current time: $($currentTime.ToString("yyyy-MM-dd HH:mm:ss"))"
+          $timeDifference = ($currentTime - $lastReleaseTime).TotalSeconds
+          Write-Host "Time difference: $timeDifference"
+          if ($timeDifference -le 86400) {
+            Write-Host "The latest release is less than 24 hours old. Additional building tests will be cunducted."
+            "should_ship_build_tests=false" | Out-File -FilePath $env:GITHUB_ENV -Append
+          } else {
+            Write-Host "The latest release is more than 24 hours old. Additional building tests will be skipped."
             "should_ship_build_tests=true" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
+        }catch{
+          Write-Host "No release found. Additional building tests will be skipped."
+          "should_ship_build_tests=true" | Out-File -FilePath $env:GITHUB_ENV -Append
+        }
     - name: Checkout repository
       if: ${{ env.should_ship_build_tests == 'false' }}
       uses: actions/checkout@v4
