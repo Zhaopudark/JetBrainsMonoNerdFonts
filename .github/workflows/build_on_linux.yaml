@@ -14,8 +14,6 @@ jobs:
         env:
           GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
         run: |
-          $token = $env:GITHUB_TOKEN
-          $lastRelease = Invoke-RestMethod -Uri "https://api.github.com/repos/${env:GITHUB_REPOSITORY}/releases/latest" -Headers @{"Authorization" = "Bearer $token"}
           try{
             $last_release = Invoke-RestMethod -Uri "https://api.github.com/repos/${Env:GIT_USER_NAME}/JetBrainsMonoNerdFonts/releases"
             $last_release_time = [System.DateTime]::Parse($last_release.created_at)
@@ -35,8 +33,6 @@ jobs:
             Write-Host "No release found. Additional building tests will be skipped."
             "should_ship_build_tests=true" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Checkout repository
       if: ${{ env.should_ship_build_tests == 'false' }}
       uses: actions/checkout@v4
