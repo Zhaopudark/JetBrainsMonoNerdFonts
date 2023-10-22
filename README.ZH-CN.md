@@ -1,5 +1,17 @@
+
+
+<div align="center">
+<strong>
+<samp>
+
 [![Build on Windows](https://github.com/Zhaopudark/JetBrainsMonoNerdFonts/actions/workflows/build_on_windows.yaml/badge.svg)](https://github.com/Zhaopudark/JetBrainsMonoNerdFonts/actions)
 [![Build on Linux](https://github.com/Zhaopudark/JetBrainsMonoNerdFonts/actions/workflows/build_on_linux.yaml/badge.svg)](https://github.com/Zhaopudark/JetBrainsMonoNerdFonts/actions)
+
+[English](README.md) · [简体中文](README.ZH-CN.md)
+
+</samp>
+</strong>
+</div>
 
 # JetBrainsMonoNerdFonts (OpenType Layout, TrueType Outlines) (Regulear)
 
