@@ -1,0 +1,20 @@
+    
+# https://github.com/googlefonts/gftools/tree/main/docs/gftools-builder
+
+    sources:
+      - JetBrainsMono.glyphs
+      - JetBrainsMono-Italic.glyphs
+    axisOrder:
+      - wght
+      - ital
+    familyName: JetBrains Mono
+    logLevel: ERROR
+    buildVariable: false
+    buildStatic: false
+    buildOTF: false
+    buildTTF: true
+    buildWebfont: false
+    cleanUp: false
+    
+  
+

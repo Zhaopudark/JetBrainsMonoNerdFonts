@@ -1,0 +1,3 @@
+packaging
+gftools
+fonttools[woff]
