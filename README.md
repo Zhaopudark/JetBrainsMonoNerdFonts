@@ -4,8 +4,10 @@
 <strong>
 <samp>
 
-[![Build on Windows](https://github.com/Zhaopudark/JetBrainsMonoNerdFonts/actions/workflows/build_on_windows.yaml/badge.svg)](https://github.com/Zhaopudark/JetBrainsMonoNerdFonts/actions)
-[![Build on Linux](https://github.com/Zhaopudark/JetBrainsMonoNerdFonts/actions/workflows/build_on_linux.yaml/badge.svg)](https://github.com/Zhaopudark/JetBrainsMonoNerdFonts/actions)
+[![Build on Windows](https://github.com/Zhaopudark/JetBrainsMonoNerdFonts/actions/workflows/build_on_windows.yaml/badge.svg)](https://github.com/Zhaopudark/JetBrainsMonoNerdFonts/actions/workflows/build_on_windows.yaml)
+[![Build on Linux](https://github.com/Zhaopudark/JetBrainsMonoNerdFonts/actions/workflows/build_on_linux.yaml/badge.svg)](https://github.com/Zhaopudark/JetBrainsMonoNerdFonts/actions/workflows/build_on_linux.yaml)
+[![GitHub release (with filter)](https://img.shields.io/github/v/release/JetBrains/JetBrainsMono?label=JetBrainsMono)](https://github.com/JetBrains/JetBrainsMono/releases)
+[![GitHub release (with filter)](https://img.shields.io/github/v/release/ryanoasis/nerd-fonts?label=nerd-fonts)](https://github.com/ryanoasis/nerd-fonts/releases)
 
 [English](README.md) · [简体中文](README.ZH-CN.md)
 
