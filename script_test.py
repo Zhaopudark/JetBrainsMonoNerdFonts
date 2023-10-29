@@ -9,6 +9,6 @@ if __name__ == "__main__":
 
     # Get the value of 'a' from the command line argument
     a = sys.argv[1]
-    sys.exit(int(0))
+    sys.exit(int(a))
    
         
