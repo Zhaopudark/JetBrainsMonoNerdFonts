@@ -1,0 +1,49 @@
+name: Workflow tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Workflow-tests:
+    runs-on: ubuntu-latest
+    steps:
+   
+    - name: Check, compile and upload
+      env:
+        GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
+        GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
+        GITHUB_TOKEN: ${{ secrets.PAT}}
+      shell: pwsh
+      run: |
+        sudo apt install fontforge
+        pip install -r "./requirements.txt" -q
+        python ./auto_update.py
+        if ($LASTEXITCODE -eq 0){
+          git config --global user.email ${Env:GIT_USER_EMAIL}
+          git config --global user.name ${Env:GIT_USER_NAME}
+
+          git add .
+          git commit -m "Auto commit $((Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))"
+          git push origin main
+
+          $jsonContent = Get-Content -Path './basicinfo.json' -Raw
+          $jsonData = $jsonContent | ConvertFrom-Json
+          
+          git tag -a "$($jsonData.self.version)" -m "Auto tag $($jsonData.self.version)"
+          git push origin --delete "$($jsonData.self.version)"
+          git push origin "$($jsonData.self.version)"
+
+          "should_release_new=true" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "release_name=$("Auto Release $($jsonData.self.version)")" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "tag_name=$($jsonData.self.version)" | Out-File -FilePath $env:GITHUB_ENV -Append
+          
+          "Auto release JetBrainsMonoNerdFonts: $($jsonData.self.version)" | Out-File -FilePath ./ReleaseNote.txt -Append
+          "- With [JetBrainsMono: $($jsonData.JetBrainsMono.version)]($($jsonData.JetBrainsMono.release_url_prefix)$($jsonData.JetBrainsMono.version))" | Out-File -FilePath ./ReleaseNote.txt -Append
+          "- With [nerd-fonts: $($jsonData.'nerd-fonts'.version)]($($jsonData.'nerd-fonts'.release_url_prefix)$($jsonData.'nerd-fonts'.version))" | Out-File -FilePath ./ReleaseNote.txt -Append
+          Move-Item "Output/JetBrainsMonoNerdFont-Regular.ttf" "Output/JetBrainsMonoNerdFont-Regular-$($jsonData.self.version).ttf"
+        }else{
+          Write-Host "No update."
+          "should_release_new=false" | Out-File -FilePath $env:GITHUB_ENV -Append
+        }
+    
+                
