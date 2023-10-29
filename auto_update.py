@@ -78,14 +78,15 @@ if __name__ == "__main__":
     try:
         script_root = pathlib.Path(__file__).parent.absolute()
         main(json_info_path=f"{script_root}/basicinfo.json")
+        print("Success.")
     except BuildException as e:
-        logger.error(f"Build Exception: {e}")
-        sys.exit(1)
+        logger.warning(f"Build Exception: {e}")
+        print(f"Build Exception: {e}")
     except UpdateException as e:
-        logger.error(f"Update Exception: {e}")
-        sys.exit(2)
+        logger.warning(f"Update Exception: {e}")
+        print(f"Update Exception: {e}")
     except Exception as e:
-        logger.error(f"Other Exception: {e}")
-        sys.exit(3)
+        logger.warning(f"Other Exception: {e}")
+        print(f"Other Exception: {e}")
    
         

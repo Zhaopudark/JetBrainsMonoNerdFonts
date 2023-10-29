@@ -26,8 +26,8 @@ jobs:
       run: |
         sudo apt install fontforge
         pip install -r "./requirements.txt" -q
-        python ./auto_update.py
-        if ($LASTEXITCODE -eq 0){
+        $output = Invoke-Expression "python ./auto_update.py"
+        if ($output -match "Success"){
           git config --global user.email ${Env:GIT_USER_EMAIL}
           git config --global user.name ${Env:GIT_USER_NAME}
 

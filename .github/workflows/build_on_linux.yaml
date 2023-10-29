@@ -20,23 +20,13 @@ jobs:
         GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
       shell: pwsh
       run: |
-        try{
-          $last_release = Invoke-RestMethod -Uri "https://api.github.com/repos/${Env:GIT_USER_NAME}/JetBrainsMonoNerdFonts/releases"
-          $last_release_time = [System.DateTime]::Parse($last_release.created_at)
-          Write-Host "Last release time: $($last_release_time.ToString("yyyy-MM-dd HH:mm:ss"))"
-          $current_time = Get-Date
-          Write-Host "Current time: $($current_time.ToString("yyyy-MM-dd HH:mm:ss"))"
-          $time_difference = ($current_time - $last_release_time).TotalSeconds
-          Write-Host "Time difference: $time_difference"
-          if ($time_difference -le 86400) {
-            Write-Host "The latest release is less than 24 hours old. Additional building tests will be cunducted."
-            "should_ship_build_tests=false" | Out-File -FilePath $env:GITHUB_ENV -Append
-          } else {
-            Write-Host "The latest release is more than 24 hours old. Additional building tests will be skipped."
-            "should_ship_build_tests=true" | Out-File -FilePath $env:GITHUB_ENV -Append
-          }
-        }catch{
-          Write-Host "No release found. Additional building tests will be skipped."
+        if $(. "./Utils/check_if_updated_within_24H.ps1" ${{ secrets.GIT_USER_NAME }} JetBrainsMonoNerdFonts){
+          Write-Host "The latest release is less than 24 hours old."
+          Write-Host "Additional building tests will be cunducted."
+          "should_ship_build_tests=false" | Out-File -FilePath $env:GITHUB_ENV -Append
+        } else {
+          Write-Host "The latest release is more than 24 hours old, or no release found."
+          Write-Host "Additional building tests will be skipped."
           "should_ship_build_tests=true" | Out-File -FilePath $env:GITHUB_ENV -Append
         }
     - if: ${{ env.should_ship_build_tests == 'false' }}
