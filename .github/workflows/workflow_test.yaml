@@ -24,6 +24,11 @@ jobs:
       shell: pwsh
       run: |
         python ./script_test.py ${{ github.event.inputs.parameter_a }}
+        if ($LASTEXITCODE -eq 0){
+          Write-Host "The `$LASTEXITCODE is: $($LASTEXITCODE)."
+        }else{
+          Write-Host "The `$LASTEXITCODE is: $($LASTEXITCODE)."
+        }
 
         
     
