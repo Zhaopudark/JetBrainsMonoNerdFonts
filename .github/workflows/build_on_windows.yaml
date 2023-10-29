@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -20,7 +19,7 @@ jobs:
         GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
       shell: pwsh
       run: |
-        if $(. "./Utils/check_if_updated_within_24H.ps1" ${{ secrets.GIT_USER_NAME }} JetBrainsMonoNerdFonts){
+        if ($(. "./Utils/check_if_updated_within_24H.ps1" ${{ secrets.GIT_USER_NAME }} JetBrainsMonoNerdFonts)){
           Write-Host "The latest release is less than 24 hours old."
           Write-Host "Additional building tests will be cunducted."
           "should_ship_build_tests=false" | Out-File -FilePath $env:GITHUB_ENV -Append
