@@ -2,6 +2,11 @@ name: Workflow tests
 
 on:
   workflow_dispatch:
+    inputs:
+        parameter_a:
+          description: '参数 A 的说明'
+          required: true
+          default: 0
 
 jobs:
   Workflow-tests:
@@ -18,7 +23,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PAT}}
       shell: pwsh
       run: |
-        python ./script_test.py
+        python ./script_test.py ${{ github.event.inputs.parameter_a }}
 
         
     
