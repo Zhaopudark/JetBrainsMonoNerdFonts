@@ -18,18 +18,14 @@ jobs:
         python-version: '3.11'
         cache: 'pip' # caching pip dependencies
     - name: Check, compile and upload
-      env:
-        GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
-        GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
-        GITHUB_TOKEN: ${{ secrets.PAT}}
       shell: pwsh
       run: |
         sudo apt install fontforge
         pip install -r "./requirements.txt" -q
         $output = Invoke-Expression "python ./auto_update.py"
         if ($output -match "Success"){
-          git config --global user.email ${Env:GIT_USER_EMAIL}
-          git config --global user.name ${Env:GIT_USER_NAME}
+          git config --global user.email ${{ secrets.GIT_USER_EMAIL }}
+          git config --global user.name ${{ secrets.GIT_USER_NAME }}
 
           git add .
           git commit -m "Auto commit $((Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))"
