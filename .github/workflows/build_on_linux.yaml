@@ -29,9 +29,9 @@ jobs:
           "should_ship_build_tests=true" | Out-File -FilePath $env:GITHUB_ENV -Append
         }
     - if: ${{ env.should_ship_build_tests == 'false' }}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.11'
+        python-version: '3.12'
         cache: 'pip' # caching pip dependencies
     - name: Build
       if: ${{ env.should_ship_build_tests == 'false' }}
