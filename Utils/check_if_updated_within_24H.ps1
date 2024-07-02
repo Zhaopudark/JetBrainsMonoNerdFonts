@@ -11,7 +11,7 @@ try{
     $headers = @{
         Authorization = "token $GithubPAT"
     }
-    $last_release = Invoke-RestMethod -Uri "https://api.github.com/repos/$UserName/$RepoName/releases" -Headers $headers
+    $last_release = Invoke-RestMethod -Uri "https://api.github.com/repos/$UserName/$RepoName/releases/latest" -Headers $headers
     $last_release_time = [System.DateTime]::Parse($last_release.created_at)
     Write-Host "Last release time: $($last_release_time.ToString("yyyy-MM-dd HH:mm:ss"))"
     $current_time = Get-Date
