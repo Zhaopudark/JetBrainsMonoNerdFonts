@@ -8,7 +8,7 @@ import subprocess
 import json
 from packaging import version
 
-from Utils.github_helper import get_latest_stable_version
+from Utils.github_helper import get_latest_stable_version_from_github
 from Utils.log_helper import logger_factory
 
 logger = logger_factory(name="auto_update",level=logging.DEBUG)
@@ -40,25 +40,28 @@ def local_build_test(build_script_path:str,build_output_path:str):
         raise BuildException(f"Build failed. Error: {e}")
 
 
-def main(json_info_path:str):
+def main(json_info_path:str,github_pat_token:str):
+    
     with open(json_info_path, 'r', encoding='utf-8') as json_file:
         parsed_dict = json.load(json_file)
-        
+    
     jbm_version_old = version.parse(parsed_dict["JetBrainsMono"]["version"])
-    jbm_version_new = get_latest_stable_version(
+    jbm_version_new = get_latest_stable_version_from_github(
                         user_name=parsed_dict["JetBrainsMono"]["user_name"],
                         repo_name=parsed_dict["JetBrainsMono"]["repo_name"],
                         timeout=10,
-                        defalut_version=parsed_dict["JetBrainsMono"]["defalut_version"]
+                        defalut_version=parsed_dict["JetBrainsMono"]["defalut_version"],
+                        pat_token=github_pat_token
                     )
     nf_version_old = version.parse(parsed_dict["nerd-fonts"]["version"])
-    nf_version_new = get_latest_stable_version(
+    nf_version_new = get_latest_stable_version_from_github(
                         user_name=parsed_dict["nerd-fonts"]["user_name"],
                         repo_name=parsed_dict["nerd-fonts"]["repo_name"],
                         timeout=10,
-                        defalut_version=parsed_dict["nerd-fonts"]["defalut_version"]
+                        defalut_version=parsed_dict["nerd-fonts"]["defalut_version"],
+                        pat_token=github_pat_token
                     )
-    if ((jbm_version_new > jbm_version_old) and (nf_version_new > nf_version_old)):
+    if ((jbm_version_new > jbm_version_old) or (nf_version_new > nf_version_old)):
         logger.info("Test build on local.")
         local_build_test(
             build_script_path=parsed_dict["self"]["build_script_path"],
@@ -76,8 +79,11 @@ def main(json_info_path:str):
 
 if __name__ == "__main__":
     try:
+        if len(sys.argv) != 2:
+            print("Usage: python ./auto_update.py <GITHUB_PAT>")
+            sys.exit(1)
         script_root = pathlib.Path(__file__).parent.absolute()
-        main(json_info_path=f"{script_root}/basicinfo.json")
+        main(json_info_path=f"{script_root}/basicinfo.json",github_pat_token=sys.argv[1])
         print("Success.")
     except BuildException as e:
         logger.warning(f"Build Exception: {e}")
@@ -88,5 +94,3 @@ if __name__ == "__main__":
     except Exception as e:
         logger.warning(f"Other Exception: {e}")
         print(f"Other Exception: {e}")
-   
-        
