@@ -3,10 +3,15 @@ param(
     [Parameter(Mandatory)]
     [string] $UserName,
     [Parameter(Mandatory)]
-    [string] $RepoName
+    [string] $RepoName,
+    [Parameter(Mandatory)]
+    [string] $GithubPAT
 )
 try{
-    $last_release = Invoke-RestMethod -Uri "https://api.github.com/repos/$UserName/$RepoName/releases"
+    $headers = @{
+        Authorization = "token $GithubPAT"
+    }
+    $last_release = Invoke-RestMethod -Uri "https://api.github.com/repos/$UserName/$RepoName/releases" -Headers $headers
     $last_release_time = [System.DateTime]::Parse($last_release.created_at)
     Write-Host "Last release time: $($last_release_time.ToString("yyyy-MM-dd HH:mm:ss"))"
     $current_time = Get-Date
