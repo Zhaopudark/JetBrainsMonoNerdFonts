@@ -22,12 +22,12 @@ class BuildException(Exception):
         self.message = message
         super().__init__(self.message)      
 
-def local_build_test(build_script_path:str,build_output_path:str):
+def local_build_test(build_script_path:str,build_output_path:str,pat_token:str):
     try:
         logger.info('Cleaning...')
         if os.path.exists(build_output_path):
             os.remove(build_output_path)
-        command = f'pwsh -ExecutionPolicy Bypass -File "{build_script_path}"'
+        command = f'pwsh -ExecutionPolicy Bypass -File "{build_script_path}" -GithubPAT "{pat_token}"'
         logger.info('Compiling...')
         subprocess.run(command, shell=True, check=True)
         if os.path.exists(build_output_path):
@@ -65,7 +65,8 @@ def main(json_info_path:str,github_pat_token:str):
         logger.info("Test build on local.")
         local_build_test(
             build_script_path=parsed_dict["self"]["build_script_path"],
-            build_output_path=parsed_dict["self"]["build_output_path"])
+            build_output_path=parsed_dict["self"]["build_output_path"],
+            pat_token=github_pat_token)
         self_version = version.parse(parsed_dict['self']['version'])
         self_version = version.parse(f"v{self_version.major}.{self_version.minor+1}")
         parsed_dict['self']['version'] = f"v{self_version}"

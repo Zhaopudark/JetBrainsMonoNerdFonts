@@ -15,8 +15,6 @@ jobs:
       with:
         ref: main
     - name: Check for new release
-      env:
-        GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
       shell: pwsh
       run: |
         if ($(. "./Utils/check_if_updated_within_24H.ps1" ${{ secrets.GIT_USER_NAME }} JetBrainsMonoNerdFonts ${{secrets.PAT}})){
@@ -39,4 +37,4 @@ jobs:
       run: |
         sudo apt install fontforge
         pip install -r "./requirements.txt" -q
-        . "./build.ps1"
+        . "./build.ps1" ${{secrets.PAT}}
