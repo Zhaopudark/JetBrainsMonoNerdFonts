@@ -10,11 +10,8 @@
     familyName: JetBrains Mono
     logLevel: ERROR
     buildVariable: false
-    buildStatic: false
+    buildStatic: true
     buildOTF: false
     buildTTF: true
     buildWebfont: false
-    cleanUp: false
-    
-  
-
+    cleanUp: true

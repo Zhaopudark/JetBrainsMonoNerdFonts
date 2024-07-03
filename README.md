@@ -41,6 +41,8 @@ Or, you can build it by yourself as the following steps.
 ### Build on Windows
 - Requirements:
     - `Windows` platform.
+    - [PowerShell 7.x](https://github.com/PowerShell/PowerShell).
+      - For stable build, you need to provide a `Github Personal Access Token` as a shell variable `$GithubPAT`.
     - `Python 3.11` or higher. (As long as you can install the following dependencies correctly.)
     - `Winget`, i.e., [winget-cli](https://github.com/microsoft/winget-cli)
     - Other Tools:
@@ -48,6 +50,7 @@ Or, you can build it by yourself as the following steps.
       - [FontForge](https://fontforge.org/en-US/downloads/)
       - [gftools builder](https://googlefonts.github.io/gf-guide/build.html)
       - [fonttools](https://fonttools.readthedocs.io/en/latest/)
+    
     
 - Steps:
   
@@ -62,7 +65,7 @@ Or, you can build it by yourself as the following steps.
   Add-PathToCurrentProcessEnvPath -Path "C:\Program Files (x86)\FontForgeBuilds\bin"
 
   pip install -r "./requirements.txt" -q
-  . ".\build.ps1"
+  . ".\build.ps1" $GithubPAT # consider to provide a Github Personal Access Token
   ```
   
 - Get the output font file from `.\Output\JetBrainsMonoNerdFont-Regular.ttf`.
@@ -71,6 +74,8 @@ Or, you can build it by yourself as the following steps.
 
 - Requirements:
   - `Linux` platform.
+  - [PowerShell 7.x](https://github.com/PowerShell/PowerShell).
+    - For stable build, you need to provide a `Github Personal Access Token` as a shell variable `$GithubPAT`.
   - `Python 3.11` or higher. (As long as you can install the following dependencies correctly.)
   - Other Tools:
     - [FontForge](https://fontforge.org/en-US/downloads/)
@@ -86,7 +91,7 @@ Or, you can build it by yourself as the following steps.
   sudo apt install fontforge
   
   pip install -r "./requirements.txt" -q
-  . "./build.ps1"
+  . "./build.ps1" $GithubPAT # consider to provide a Github Personal Access Token
   ```
   
 - Get the output font file from `.\Output\JetBrainsMonoNerdFont-Regular.ttf`.

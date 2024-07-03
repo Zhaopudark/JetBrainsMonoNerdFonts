@@ -40,6 +40,8 @@
 ### Build on Windows
 - 要求：
     - `Windows` 平台.
+    - [PowerShell 7.x](https://github.com/PowerShell/PowerShell).
+      - 为了稳定构建，您需要提供一个`Github个人访问令牌`作为shell变量`$GithubPAT`.
     - `Python 3.11` 或更高（前提是能正确安装后续依赖）.
     - `Winget`工具，例如[winget-cli](https://github.com/microsoft/winget-cli)
     - 其他工具：
@@ -69,6 +71,8 @@
 
 - 要求：
   - `Linux` 平台.
+  - [PowerShell 7.x](https://github.com/PowerShell/PowerShell).
+    - 为了稳定构建，您需要提供一个`Github个人访问令牌`作为shell变量`$GithubPAT`.
   - `Python 3.11` 或更高（前提是能正确安装后续依赖）.
   - 其他工具：
     - [FontForge](https://fontforge.org/en-US/downloads/)
